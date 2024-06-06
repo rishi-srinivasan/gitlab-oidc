@@ -2,6 +2,14 @@
 
 CDK app to create IAM Identity Provider and Role using Typescript for Gitlab OpenID Connect (OIDC) authentication.
 
+## Setup
+
+* Update AWS credentials using the AWS CLI command `aws configure` or in the credentials file in .aws directory
+* Clone this repository and make the modifications necessary as mentioned in the "Modifications" section
+* Deploy the CDK app using the commands in "Run Commands" section
+* Copy the role ARN generated and paste it in Gitlab CI/CD settings page (path below) with variable name -> **ROLE_ARN**: 
+  *  Gitlab CI/CD settings: Gitlab home page > Settings > CI/CD > Variables
+
 ## Modifications
 In [gitlab-oidc-stack.ts](https://github.com/rishi-srinivasan/gitlab-oidc/blob/main/lib/gitlab-oidc-stack.ts) file, change the following:
 
