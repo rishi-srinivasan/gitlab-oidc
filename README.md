@@ -1,14 +1,19 @@
-# Welcome to your CDK TypeScript project
+# Gitlab OpenID Connect Authentication using CDK TypeScript
 
-CDK app to create IAM Identity Provider and Role using Typescript for Gitlab OpenID Connect (OIDC) authentication
+CDK app to create IAM Identity Provider and Role using Typescript for Gitlab OpenID Connect (OIDC) authentication.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Modifications
+In [gitlab-oidc-stack.ts](https://github.com/rishi-srinivasan/gitlab-oidc/blob/main/lib/gitlab-oidc-stack.ts) file, change the following:
 
-## Useful commands
+`gitlabUrl` - URL of your gitlab project
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+`gitlabProjectPath` - Gitlab project path
+
+## Run commands
+
+* `cdk bootstrap` - Bootstraps the CDK app to your AWS account
+* `cdk deploy --all` - Deploys both stacks to your AWS account
+
+## Deployment
+
+After deployment, The role ARN will be printed on the terminal, Copy the role ARN and paste it in the Gitlab runner environment variable.
