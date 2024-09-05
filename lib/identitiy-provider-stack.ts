@@ -37,7 +37,10 @@ export class IdentityProviderStack extends Stack {
             statements: [
                 new iam.PolicyStatement({
                     sid: 'GitlabOidcPolicy',
-                    actions: ['sts:GetCallerIdentity'],
+                    actions: [
+                        'sts:GetCallerIdentity',
+                        'cloudformation:*'
+                    ],
                     resources: ['*']
                 })
             ]
