@@ -10,8 +10,16 @@ export class GitlabOidcStack extends Stack {
       stackName: 'identity-provider-stack',
       gitlabUrl: 'https://gitlab.oevcloud.org',
       gitlabProjectPath: {
-        development: 'projekte-oev-berlin/bln-website-v2:ref_type:branch:ref:development',
-        main: 'projekte-oev-berlin/bln-website-v2:ref_type:branch:ref:main'
+        development: [
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/infrastructure:ref_type:branch:ref:development',
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/dapp-frontend:ref_type:branch:ref:development',
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/dapp-admin-web3-poc:ref_type:branch:ref:development'
+        ],
+        main: [
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/infrastructure:ref_type:branch:ref:main',
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/dapp-frontend:ref_type:branch:ref:main',
+            'projekte-oev-berlin/digital-campus-360/funpoints-dapp/dapp-admin-web3-poc:ref_type:branch:ref:main'
+            ]
       }
     });
   }

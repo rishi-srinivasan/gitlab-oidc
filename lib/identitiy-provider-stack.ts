@@ -4,8 +4,8 @@ import {Construct} from "constructs";
 interface GitlabOidcProps extends StackProps {
     gitlabUrl: string,
     gitlabProjectPath: {
-        development: string,
-        main: string
+        development: string[],
+        main: string[]
     }
 }
 
@@ -33,7 +33,7 @@ export class IdentityProviderStack extends Stack {
             assumedBy: oidcPrincipal,
         });
 
-        const policy = new iam.ManagedPolicy(this, 'Policy', {
+        const getCallerIdentityPolicy = new iam.ManagedPolicy(this, 'Policy', {
             statements: [
                 new iam.PolicyStatement({
                     sid: 'GitlabOidcPolicy',
@@ -46,7 +46,17 @@ export class IdentityProviderStack extends Stack {
             ]
         });
 
-        role.addManagedPolicy(policy);
+        const adminAccessIdentityPolicy = iam.ManagedPolicy.fromAwsManagedPolicyName(
+            'AdministratorAccess');
+        const ssmFullAccessIdentityPolicy = iam.ManagedPolicy.fromAwsManagedPolicyName(
+            'AmazonSSMFullAccess');
+        const cloudFormationFullAccessIdentityPolicy = iam.ManagedPolicy.fromAwsManagedPolicyName(
+            'AWSCloudFormationFullAccess');
+
+        role.addManagedPolicy(getCallerIdentityPolicy);
+        role.addManagedPolicy(adminAccessIdentityPolicy);
+        role.addManagedPolicy(ssmFullAccessIdentityPolicy);
+        role.addManagedPolicy(cloudFormationFullAccessIdentityPolicy);
 
         new CfnOutput(this, 'gitlab-oidc-role-arn', {
             value: role.roleArn,
